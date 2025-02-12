@@ -28,7 +28,7 @@ A high-performance monorepo template featuring:
 ### 1. Installation
 ```sh
 # Clone repository
-git clone [your-repo-url]
+git clone https://github.com/Adetimmy/Mono-Repo.git
 cd your-monorepo
 
 # Install dependencies
