@@ -14,32 +14,33 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
+import { capitalizeFirstLetter, cn } from "@/lib/utils";
 import { User2Icon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-  const [photos, setPhotos] = useState(1);
+  const [id, setId] = useState(1);
   return (
     <DataFetcher url="/posts">
       {(data) => {
         return (
           <ResizablePanelGroup
             direction="horizontal"
-            className="max-w-md rounded-lg border md:min-w-7xl m-auto mt-5 h-[1600px]"
+
+            className="max-w-md rounded-lg border md:min-w-7xl m-auto mt-5 min-h-auto"
           >
-            <ResizablePanel defaultSize={50} className="h-80">
+            <ResizablePanel defaultSize={50} className="h-[650px]">
               <ScrollArea className="h-full">
                 <div className="flex h-auto flex-col  py-6">
-                  {data.map((item: any) => (
+                  {data?.map((item: any) => (
                     <div
                       key={item.id}
                       className={cn(
-                        "hover:bg-red-500 p-2 line-clamp-1 cursor-pointer",
-                        item.id === photos ? "bg-amber-700" : ""
+                        " p-2 line-clamp-1 cursor-pointer",
+                        item.id === id ? "bg-amber-700" : "hover:bg-red-500"
                       )}
-                      onClick={() => setPhotos(item.id)}
+                      onClick={() => setId(item.id)}
                     >
                       <span className="font-semibold">{item.title}</span>
                     </div>
@@ -51,17 +52,16 @@ export default function Home() {
             <ResizablePanel defaultSize={50}>
               <ResizablePanelGroup direction="vertical">
                 <ResizablePanel defaultSize={25}>
-                  <ScrollArea className="h-full">
-                    <DataFetcher url={`/photos/${photos}`}>
+                  <ScrollArea className="">
+                    <DataFetcher url={`/photos/${id}`}>
                       {(data) => {
-                        console.log(data);
                         return (
                           <Image
-                            src={data.url}
+                            src={data?.url}
                             loader={() => {
-                              return data.thumbnailUrl;
+                              return data?.thumbnailUrl;
                             }}
-                            alt={data.title}
+                            alt={data?.title}
                             width={500}
                             height={500}
                           />
@@ -73,12 +73,12 @@ export default function Home() {
                 <ResizableHandle />
                 <ResizablePanel defaultSize={75}>
                   <ScrollArea className="h-full px-4">
-                    <DataFetcher url={`/comments?postId=${photos}`}>
+                    <DataFetcher url={`/comments?postId=${id}`}>
                       {(data) => {
-                        console.log(data);
+                
                         return (
                           <>
-                            {data.map((item:{
+                            {data?.map((item:{
                               name:string,
                               email:string,
                               body:string
@@ -92,7 +92,7 @@ export default function Home() {
                                       </AvatarFallback>
                                     </Avatar>
                                     <div className="flex flex-col">
-                                      <CardTitle>{`${item.name?.at(0)?.toUpperCase() ?? ''}${item.name?.substring(1) ?? ''}`}</CardTitle>
+                                      <CardTitle>{capitalizeFirstLetter(item.name)}</CardTitle>
                                       <CardDescription>
                                         {item.email}
                                       </CardDescription>
