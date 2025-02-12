@@ -10,9 +10,9 @@ interface DataFetcherProps {
 
 export const DataFetcher: React.FC<DataFetcherProps> = ({ url, children }) => {
   const { data, isLoading } = useFetch({ url });
-  console.log(data);
+
   if (isLoading) {
-    return <div className="justify-center flex items-center h-full"><p>loading...</p></div>;
+    return <div className="justify-center flex items-center h-auto my-auto"><p>loading...</p></div>;
   }
   if (data?.error) {
     useToastNofication(data.error);

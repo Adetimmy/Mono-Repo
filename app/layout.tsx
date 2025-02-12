@@ -28,7 +28,7 @@ export default function RootLayout({
       <ReactQueryProvider>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         {children}
         <Toaster/>
