@@ -1,4 +1,4 @@
-# Modern React/Next.js Monorepo
+# Adetimmy's Modern React/Next.js Monorepo
 
 A high-performance monorepo template featuring:
 - ⚛️ React 19 + Next.js 15
