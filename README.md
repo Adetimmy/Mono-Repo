@@ -33,6 +33,9 @@ cd your-monorepo
 
 # Install dependencies
 pnpm install
+
+# Spin-Up Server
+pnpm run dev
 ```
 
 ### 2. Add new ShadCn UI component
